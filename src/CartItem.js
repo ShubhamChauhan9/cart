@@ -9,8 +9,9 @@ class CartItem extends React.Component {
             qty: 1,
             img: ""
         }
+        // this.increaseQuantity=this.increaseQuantity.bind(this);
     }
-    increaseQuantity(){
+    increaseQuantity=()=>{
         console.log(this.state);
     }
     render() {
@@ -43,7 +44,7 @@ class CartItem extends React.Component {
             {/* < img alt = 'increase'
             className = 'action-icons'
             src = 'image.png'  /> */}
-            <div className='action-icons' onClick={this.increaseQuantity.bind(this)}><ion-icon name="add-circle-outline"></ion-icon></div>
+            <div className='action-icons' onClick={this.increaseQuantity}><ion-icon name="add-circle-outline"></ion-icon></div>
             
 
             <div className='action-icons'><ion-icon name = "remove-circle-outline" > </ion-icon></div>
