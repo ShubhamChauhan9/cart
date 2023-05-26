@@ -10,20 +10,57 @@ class CartItem extends React.Component {
             img: ""
         }
         // this.increaseQuantity=this.increaseQuantity.bind(this);
+        // this.testing();
     }
+    // testing(){
+    //     let promise=new Promise((resolve,reject)=>{
+    //         console.log('above settimeout',this.state);
+    //         setTimeout(()=>{
+    //             console.log('inside setTimeout',this.state)
+    //             resolve('done')
+    //         },5000);
+    //         console.log('below settimeout',this.state)
+    //     })
+
+    //     promise.then(()=>{
+    //          this.setState({
+    //               qty:this.state.qty+10
+    //             },()=>{console.log(this.state)})
+
+    //         this.setState({
+    //               qty:this.state.qty+10
+    //             },()=>{console.log(this.state)})
+
+    //         this.setState({
+    //               qty:this.state.qty+10
+    //             },()=>{console.log(this.state)})
+            
+
+    //             console.log('inside promise.then',this.state)
+    //     })
+
+    //     console.log('inside testing',this.state)
+    // }
+
     increaseQuantity=()=>{
         // passing object to setState() if prevState is not required
-        //    this.setState({
-        //     qty:this.state.qty+1 
-        //    })
+           this.setState({
+            qty:this.state.qty+1 
+           },()=>{
+                console.log('this.state',this.state)
+               })
 
         //    passing callback to setState if prevState is required
-           this.setState((prevState)=>{
-              return {
-                qty:prevState.qty+1 
-              } 
-           })
-        console.log(this.state);
+
+        // setState is asynchronous(not in ajax call react wont do batching) in event handlers , react provide another argument to achieve synchronous call
+        //    this.setState((prevState)=>{
+        //       return {
+        //         qty:prevState.qty+1 
+        //       } 
+        //    },()=>{
+        //     console.log('this.state',this.state)
+        //    })
+        // console.log(this.state);
     }
     decreaseQuantity=()=>{
         if(this.state.qty===0){
