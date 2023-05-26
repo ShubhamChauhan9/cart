@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 class CartItem extends React.Component {
     constructor() {
@@ -12,7 +12,26 @@ class CartItem extends React.Component {
         // this.increaseQuantity=this.increaseQuantity.bind(this);
     }
     increaseQuantity=()=>{
+        // passing object to setState() if prevState is not required
+        //    this.setState({
+        //     qty:this.state.qty+1 
+        //    })
+
+        //    passing callback to setState if prevState is required
+           this.setState((prevState)=>{
+              return {
+                qty:prevState.qty+1 
+              } 
+           })
         console.log(this.state);
+    }
+    decreaseQuantity=()=>{
+        if(this.state.qty===0){
+            return;
+        }
+        this.setState({
+            qty:this.state.qty-1 
+        })
     }
     render() {
         const { title, price, qty, img } = this.state;
@@ -47,7 +66,7 @@ class CartItem extends React.Component {
             <div className='action-icons' onClick={this.increaseQuantity}><ion-icon name="add-circle-outline"></ion-icon></div>
             
 
-            <div className='action-icons'><ion-icon name = "remove-circle-outline" > </ion-icon></div>
+            <div className='action-icons' onClick={this.decreaseQuantity}><ion-icon name = "remove-circle-outline" > </ion-icon></div>
             
 
            
