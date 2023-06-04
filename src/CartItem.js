@@ -32,13 +32,13 @@ class CartItem extends React.Component {
     //     console.log('inside testing',this.state)
     // }
 
-    increaseQuantity=()=>{
-        // passing object to setState() if prevState is not required
-           this.setState({
-            qty:this.state.qty+1 
-           },()=>{
-                // console.log('this.state',this.state)
-               })
+    // increaseQuantity=()=>{
+    //     // passing object to setState() if prevState is not required
+    //        this.setState({
+    //         qty:this.state.qty+1 
+    //        },()=>{
+    //             // console.log('this.state',this.state)
+    //            })
 
         //    passing callback to setState if prevState is required
 
@@ -51,18 +51,18 @@ class CartItem extends React.Component {
         //     console.log('this.state',this.state)
         //    })
         // console.log(this.state);
-    }
-    decreaseQuantity=()=>{
-        if(this.state.qty===0){
-            return;
-        }
-        this.setState({
-            qty:this.state.qty-1 
-        })
-    }
+    // }
+    // decreaseQuantity=()=>{
+    //     if(this.state.qty===0){
+    //         return;
+    //     }
+    //     this.setState({
+    //         qty:this.state.qty-1 
+    //     })
+    // }
     render() {
-        console.log(this.props,'this.props');
-        const { title, price, qty } = this.props.item;
+        // console.log(this.props,'this.props');
+        const { title, price, qty ,id } = this.props.item;
         return ( 
             <div className = 'cart-item' >
 
@@ -93,10 +93,10 @@ class CartItem extends React.Component {
             {/* < img alt = 'increase'
             className = 'action-icons'
             src = 'image.png'  /> */}
-            <div className='action-icons' onClick={this.increaseQuantity}><ion-icon name="add-circle-outline"></ion-icon></div>
+            <div className='action-icons' onClick={()=>this.props.onIncreaseButtonClick(this.props.item)}><ion-icon name="add-circle-outline"></ion-icon></div>
             
 
-            <div className='action-icons' onClick={this.decreaseQuantity}><ion-icon name = "remove-circle-outline" > </ion-icon></div>
+            <div className='action-icons' onClick={()=>this.props.onDecreaseButtonClick(this.props.item)}><ion-icon name = "remove-circle-outline" > </ion-icon></div>
             
 
            

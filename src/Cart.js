@@ -31,6 +31,35 @@ class Cart extends React.Component {
         // this.increaseQuantity=this.increaseQuantity.bind(this);
         // this.testing();
     }
+
+    IncreaseQuantity=(item)=>{
+    //    console.log("hey parent Cart , please increase the quantity using props of ", item);
+       const products=this.state.products;
+       let index=products.indexOf(item);
+       products[index].qty+=1;
+
+       this.setState({
+        // products:products
+        // shortHand for keys and values same name
+           products
+       })
+    }
+    DecreaseQuantity=(item)=>{
+        //    console.log("hey parent Cart , please increase the quantity using props of ", item);
+           const products=this.state.products;
+           let index=products.indexOf(item);
+           if(products[index].qty===0){
+            return;
+           }
+           products[index].qty-=1;
+    
+           this.setState({
+            // products:products
+            // shortHand for keys and values same name
+               products
+           })
+        }
+
   
     render(){
         const products=this.state.products;
@@ -41,7 +70,8 @@ class Cart extends React.Component {
                    return <CartItem 
                          item={item} 
                          key={item.id}
-                         func={()=>{console.log("function as props")}}
+                         onIncreaseButtonClick={this.IncreaseQuantity}
+                         onDecreaseButtonClick={this.DecreaseQuantity}
                          isloggedin={true}
                         //  jsx={<h2>testing props</h2>}
                         //  component={<CartItem/>}
@@ -52,6 +82,5 @@ class Cart extends React.Component {
         )
     }
 }
-
 
 export default Cart;
