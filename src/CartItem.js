@@ -1,17 +1,7 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            title: "mobile phone",
-            price: 10000,
-            qty: 1,
-            img: ""
-        }
-        // this.increaseQuantity=this.increaseQuantity.bind(this);
-        // this.testing();
-    }
+  
     // testing(){
     //     let promise=new Promise((resolve,reject)=>{
     //         console.log('above settimeout',this.state);
@@ -47,7 +37,7 @@ class CartItem extends React.Component {
            this.setState({
             qty:this.state.qty+1 
            },()=>{
-                console.log('this.state',this.state)
+                // console.log('this.state',this.state)
                })
 
         //    passing callback to setState if prevState is required
@@ -71,16 +61,19 @@ class CartItem extends React.Component {
         })
     }
     render() {
-        const { title, price, qty, img } = this.state;
+        console.log(this.props,'this.props');
+        const { title, price, qty } = this.props.item;
         return ( 
             <div className = 'cart-item' >
+
+                {/* {this.props.jsx} */}
 
            
             <div className = 'left-block' >
 
             
-            <img style = { styles.image }
-             />
+            <img style = { styles.image } />
+             
             
             
             
