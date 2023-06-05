@@ -60,6 +60,16 @@ class Cart extends React.Component {
            })
         }
 
+    DeleteItem=(id)=>{
+        const products=this.state.products;
+        const items= products.filter((item)=>{
+           return item.id!==id;
+        })
+        this.setState({
+            products:items
+        })
+    }
+
   
     render(){
         const products=this.state.products;
@@ -72,6 +82,7 @@ class Cart extends React.Component {
                          key={item.id}
                          onIncreaseButtonClick={this.IncreaseQuantity}
                          onDecreaseButtonClick={this.DecreaseQuantity}
+                         onDeleteButtonClick={this.DeleteItem}
                          isloggedin={true}
                         //  jsx={<h2>testing props</h2>}
                         //  component={<CartItem/>}

@@ -63,6 +63,7 @@ class CartItem extends React.Component {
     render() {
         // console.log(this.props,'this.props');
         const { title, price, qty ,id } = this.props.item;
+        const {item ,onIncreaseButtonClick,onDecreaseButtonClick ,onDeleteButtonClick}=this.props;
         return ( 
             <div className = 'cart-item' >
 
@@ -93,17 +94,17 @@ class CartItem extends React.Component {
             {/* < img alt = 'increase'
             className = 'action-icons'
             src = 'image.png'  /> */}
-            <div className='action-icons' onClick={()=>this.props.onIncreaseButtonClick(this.props.item)}><ion-icon name="add-circle-outline"></ion-icon></div>
+            <div className='action-icons' onClick={()=>onIncreaseButtonClick(item)}><ion-icon name="add-circle-outline"></ion-icon></div>
             
-
-            <div className='action-icons' onClick={()=>this.props.onDecreaseButtonClick(this.props.item)}><ion-icon name = "remove-circle-outline" > </ion-icon></div>
+             {/* decrease quantity icon image */}
+            <div className='action-icons' onClick={()=>onDecreaseButtonClick(item)}><ion-icon name = "remove-circle-outline" > </ion-icon></div>
             
 
            
             {/* < img alt = 'delete'
             className = 'action-icons'
             src = 'http://image.flaticon.com/icons/svg/1214/1214428.svg' /> */}
-            <div className='action-icons'><ion-icon name="trash-outline"></ion-icon></div>
+            <div className='action-icons' onClick={()=>onDeleteButtonClick(item.id)}><ion-icon name="trash-outline"></ion-icon></div>
             
 
             
