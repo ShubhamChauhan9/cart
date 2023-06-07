@@ -1,6 +1,7 @@
 import React from 'react';
 
-class CartItem extends React.Component {
+// class CartItem extends React.Component
+ const CartItem=(props)=>{
   
     // testing(){
     //     let promise=new Promise((resolve,reject)=>{
@@ -60,10 +61,10 @@ class CartItem extends React.Component {
     //         qty:this.state.qty-1 
     //     })
     // }
-    render() {
+    // render() {
         // console.log(this.props,'this.props');
-        const { title, price, qty ,id } = this.props.item;
-        const {item ,onIncreaseButtonClick,onDecreaseButtonClick ,onDeleteButtonClick}=this.props;
+        const { title, price, qty ,id } = props.item;
+        const {item ,onIncreaseButtonClick,onDecreaseButtonClick ,onDeleteButtonClick}=props;
         return ( 
             <div className = 'cart-item' >
 
@@ -115,13 +116,13 @@ class CartItem extends React.Component {
             
            </div>
         );
-    }
+    // }
 }
 
 const styles = {
     image: {
-        height: 110,
-        width: 110,
+        height: 150,
+        width: 150,
         borderRadius: 4,
         background: 'grey'
 

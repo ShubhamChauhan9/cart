@@ -34,3 +34,12 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+ion-icon {
+    font-size: 32px;
+    margin-right: 8px;
+}
+
+ion-icon {
+    --ionicon-stroke-width: 16px;
+}
