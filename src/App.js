@@ -9,22 +9,22 @@ class App extends React.Component {
                 {
                     title: "watch",
                     price: 99,
-                    qty: 10,
-                    img: "",
+                    qty: 7,
+                    img: "https://images.unsplash.com/photo-1517463700628-5103184eac47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdhdGNofGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
                     id:23
                 },
                 {
                     title: "umbrella",
                     price: 250,
                     qty: 3,
-                    img: "",
+                    img: " https://images.unsplash.com/photo-1516368694098-47836cebec97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHVtYnJlbGxhfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60 ",
                     id:54
                 },
                 {
                     title: "cap",
                     price: 70,
-                    qty: 8,
-                    img: "",
+                    qty: 5,
+                    img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FwfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
                     id:44
                 }
             ]
@@ -79,6 +79,15 @@ class App extends React.Component {
         });
         return count;
     }
+    getCartPrice=()=>{
+        const {products}=this.state;
+        let CartTotal=0;
+        products.forEach((item)=>{
+            CartTotal+=item.qty*item.price
+         });
+         return CartTotal;
+
+    }
 
     render(){
         // const products=this.state.products;
@@ -93,6 +102,7 @@ class App extends React.Component {
                   onDecreaseButtonClick={this.DecreaseQuantity}
                   onDeleteButtonClick={this.DeleteItem}
              />
+             <div style={{ padding:20,margin:10,backgroundColor:'cyan' ,fontSize:30}}>Total:{this.getCartPrice()}</div>
         </div>
     );
   }

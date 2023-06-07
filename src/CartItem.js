@@ -74,7 +74,7 @@ import React from 'react';
             <div className = 'left-block' >
 
             
-            <img style = { styles.image } />
+            <img style = { styles.image } src={props.item.img} />
              
             
             
