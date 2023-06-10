@@ -1,36 +1,45 @@
 import Cart from './Cart'
 import React from 'react'
 import NavBar from './NavBar';
+
+
+
+import { collection, getDocs } from "firebase/firestore"; 
+
+import {db} from './index';
+
+
+
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            products:[
-                {
-                    title: "watch",
-                    price: 99,
-                    qty: 7,
-                    img: "https://images.unsplash.com/photo-1517463700628-5103184eac47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdhdGNofGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
-                    id:23
-                },
-                {
-                    title: "umbrella",
-                    price: 250,
-                    qty: 3,
-                    img: " https://images.unsplash.com/photo-1516368694098-47836cebec97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHVtYnJlbGxhfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60 ",
-                    id:54
-                },
-                {
-                    title: "cap",
-                    price: 70,
-                    qty: 5,
-                    img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FwfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60",
-                    id:44
-                }
-            ]
+            products:[]
         }
         // this.increaseQuantity=this.increaseQuantity.bind(this);
         // this.testing();
+    }
+   async componentDidMount(){
+        // firebase
+        //  .firestore
+        //   .collection('products')
+        //    .get()
+        //     .then((snapshot)=>{console.log(snapshot);});{version 7}
+
+
+       
+
+    const querySnapshot = await getDocs(collection(db, "products"));
+    const result =querySnapshot.docs.map((doc) => {
+        //  console.log(`${doc.id} => ${doc.data()}`);
+        return {
+            ...doc.data(),
+            id:doc.id,
+        }
+       });
+       this.setState({
+        products:result
+       })
     }
 
     IncreaseQuantity=(item)=>{
