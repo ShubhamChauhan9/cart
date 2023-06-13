@@ -4,7 +4,9 @@ import NavBar from './NavBar';
 
 
 
-import { collection, getDocs } from "firebase/firestore"; 
+// import { collection, getDocs } from "firebase/firestore"; 
+
+// import { collection , onSnapshot } from "firebase/firestore";
 
 import {db} from './index';
 
@@ -17,32 +19,67 @@ class App extends React.Component {
             products:[],
             loading:true
         }
+        // this.db=firebase.firestore();
         // this.increaseQuantity=this.increaseQuantity.bind(this);
         // this.testing();
     }
-   async componentDidMount(){
-        // firebase
-        //  .firestore
-        //   .collection('products')
-        //    .get()
-        //     .then((snapshot)=>{console.log(snapshot);});{version 7}
 
+    componentDidMount() {
+
+        // const unsubscribe = onSnapshot(
+        //     collection(db, "cities"), 
+        //     (snapshot) => {
+        //       // ...
+        //     },
+        //     (error) => {
+        //       // ...
+        //     });
+          
+
+
+        this.unsubscribe = db.collection('products').onSnapshot((snapshot) => {
+          const products = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          this.setState({ products,loading:false });
+        }, (error) => {
+          console.error('Error fetching cart data:', error);
+        });
+      }
+
+//    async componentDidMount(){
+//         // firebase
+//         //  .firestore
+//         //   .collection('products')
+//         //    .get()
+//         //     .then((snapshot)=>{console.log(snapshot);});{version 7}
+//          console.log("Component did mount");
+//         const result = onSnapshot(doc(db, 'products'), (doc) => {
+//             // console.log("Current data: ", doc.data());
+//             let Data=doc.data();
+//             Data.id=doc.id;
+//             // return Data;
+//             this.setState({
+//                 products:Data,
+//                 loading:false
+//                })
+           
+//         });
 
        
+       
 
-    const querySnapshot = await getDocs(collection(db, "products"));
-    const result =querySnapshot.docs.map((doc) => {
-        //  console.log(`${doc.id} => ${doc.data()}`);
-        return {
-            ...doc.data(),
-            id:doc.id,
-        }
-       });
-       this.setState({
-        products:result,
-        loading:false
-       })
-    }
+//     // const querySnapshot = await getDocs(collection(db, "products"));
+//     // const result =querySnapshot.docs.map((doc) => {
+//     //     //  console.log(`${doc.id} => ${doc.data()}`);
+//     //     return {
+//     //         ...doc.data(),
+//     //         id:doc.id,
+//     //     }
+//     //    });
+      
+//     }
 
     IncreaseQuantity=(item)=>{
     //    console.log("hey parent Cart , please increase the quantity using props of ", item);
@@ -100,6 +137,22 @@ class App extends React.Component {
 
     }
 
+    addProduct=()=>{
+        try{ db.collection('products').add({
+            title:"washing machine",
+            price:12000,
+            qty:1,
+            img:""
+        }).then((docRef)=>{
+              console.log(docRef);
+        })}
+        catch(error){
+            
+                console.log(error);
+            
+        }
+    }
+
     render(){
         // const products=this.state.products;
            const {products,loading}=this.state;
@@ -107,6 +160,7 @@ class App extends React.Component {
         
         <div className = "App" >
             <NavBar count={this.getCartCount()} />
+            <button onClick={this.addProduct} style={{fontSize:20 ,padding:10 ,backgroundColor:'dimgray'}}>Add Product</button>
             < Cart 
                   products={products}
                   onIncreaseButtonClick={this.IncreaseQuantity}

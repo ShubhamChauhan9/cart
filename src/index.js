@@ -10,11 +10,12 @@ import App from './App';
 // import 'firebase/compat/auth';
 // import 'firebase/compat/firestore'; {]above syntax is deprecated}
 
-import {initializeApp} from "firebase/app";
-import {getFirestore} from "firebase/firestore";
+// import {initializeApp} from "firebase/app";
+// import {getFirestore} from "firebase/firestore";
 
 
-
+import firebase from 'firebase/compat/app'; 
+import 'firebase/compat/firestore';
 
 
 
@@ -33,8 +34,12 @@ const firebaseConfig = {
 
 
 
-  const app=initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  // const app=initializeApp(firebaseConfig);
+  // const db = getFirestore(app);
+ firebase.initializeApp(firebaseConfig);
+
+// Export the Firestore instance
+ const db = firebase.firestore();
   // const auth = firebase.auth();needed only in case of using authentication
 
   export { db };
