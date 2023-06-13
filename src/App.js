@@ -37,7 +37,10 @@ class App extends React.Component {
           
 
 
-        this.unsubscribe = db.collection('products').onSnapshot((snapshot) => {
+        this.unsubscribe = db.collection('products')
+        // .where('price','>',99).where('title','==','speaker')
+        .orderBy('price','desc')
+        .onSnapshot((snapshot) => {
           const products = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data()
