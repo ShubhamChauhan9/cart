@@ -14,7 +14,8 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            products:[]
+            products:[],
+            loading:true
         }
         // this.increaseQuantity=this.increaseQuantity.bind(this);
         // this.testing();
@@ -38,7 +39,8 @@ class App extends React.Component {
         }
        });
        this.setState({
-        products:result
+        products:result,
+        loading:false
        })
     }
 
@@ -100,7 +102,7 @@ class App extends React.Component {
 
     render(){
         // const products=this.state.products;
-           const {products}=this.state;
+           const {products,loading}=this.state;
     return ( 
         
         <div className = "App" >
@@ -111,6 +113,7 @@ class App extends React.Component {
                   onDecreaseButtonClick={this.DecreaseQuantity}
                   onDeleteButtonClick={this.DeleteItem}
              />
+             {loading && <h1>loading.....</h1>}
              <div style={{ padding:20,margin:10,backgroundColor:'cyan' ,fontSize:30}}>Total:{this.getCartPrice()}</div>
         </div>
     );
