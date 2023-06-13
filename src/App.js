@@ -85,13 +85,29 @@ class App extends React.Component {
     //    console.log("hey parent Cart , please increase the quantity using props of ", item);
        const products=this.state.products;
        let index=products.indexOf(item);
-       products[index].qty+=1;
 
-       this.setState({
-        // products:products
-        // shortHand for keys and values same name
-           products
-       })
+        // increasing the qty in firestore cloud collection ,as it will auto updated as we used onSnapshot call
+        try{
+         const docRef=db.collection('products').doc(products[index].id);
+
+         docRef.update({
+            qty:products[index].qty+1
+         }).then(()=>{
+            console.log('qty updated successfully');
+         })
+        }
+        catch(error){
+           console.log('error',error);
+        }
+
+
+    //    products[index].qty+=1;
+
+    //    this.setState({
+    //     // products:products
+    //     // shortHand for keys and values same name
+    //        products
+    //    })
     }
     DecreaseQuantity=(item)=>{
         //    console.log("hey parent Cart , please increase the quantity using props of ", item);
@@ -100,23 +116,51 @@ class App extends React.Component {
            if(products[index].qty===0){
             return;
            }
-           products[index].qty-=1;
+          
+           try{
+            const docRef=db.collection('products').doc(products[index].id);
+   
+            docRef.update({
+               qty:products[index].qty-1
+            }).then(()=>{
+               console.log('qty updated successfully');
+            })
+           }
+           catch(error){
+              console.log('error',error);
+           }
+
+
+        //    products[index].qty-=1;
     
-           this.setState({
-            // products:products
-            // shortHand for keys and values same name
-               products
-           })
+        //    this.setState({
+        //     // products:products
+        //     // shortHand for keys and values same name
+        //        products
+        //    })
         }
 
     DeleteItem=(id)=>{
-        const products=this.state.products;
-        const items= products.filter((item)=>{
-           return item.id!==id;
-        })
-        this.setState({
-            products:items
-        })
+        // const products=this.state.products;
+
+        try{
+            const docRef=db.collection('products').doc(id);
+   
+            docRef.delete().then(()=>{
+               console.log('product deleted successfully');
+            })
+           }
+           catch(error){
+              console.log('error',error);
+           }
+        
+
+        // const items= products.filter((item)=>{
+        //    return item.id!==id;
+        // })
+        // this.setState({
+        //     products:items
+        // })
     }
     getCartCount=()=>{
         
